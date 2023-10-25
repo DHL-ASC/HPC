@@ -13,20 +13,20 @@ int main()
 {
   timeline = std::make_unique<TimeLine>("demo.trace");
 
-  StartWorkers(3);
+  TaskManager t;
+  t.StartWorkers();
   
-  RunParallel(10, [] (int i, int size)
+  TaskManager::RunParallel([] (int i, int size)
   {
     static Timer t("timer one");
     RegionTimer reg(t);
-    if(i == 1)
       cout << "I am task " << i << " out of " << size << endl;
   });
 
   
-  RunParallel(6, [] (int i, int s)
+  TaskManager::RunParallel([] (int i, int s)
   {
-    RunParallel(6, [i] (int j, int s2)
+    TaskManager::RunParallel([i] (int j, int s2)
     {
       std::stringstream str;
       str << "nested, i,j = " << i << "," << j << "\n";
@@ -37,23 +37,23 @@ int main()
 
 
   
-  RunParallel(100,  [] (int i, int size)
+  TaskManager::RunParallel([] (int i, int size)
   {
     static Timer t("timer two", { 0, 0, 1});
     RegionTimer reg(t);
   });
 
-  RunParallel(1000,  [] (int i, int size)
+  TaskManager::RunParallel([] (int i, int size)
   {
     static Timer t("timer 3", { 1, 0, 0});
     RegionTimer reg(t);
   });
 
-  RunParallel(100, [] (int i, int s)
+  TaskManager::RunParallel([] (int i, int s)
   {
     static Timer t("timer 4", { 1, 1, 0});
     RegionTimer reg(t);    
-    RunParallel(100, [i](size_t j, size_t s2)
+    TaskManager::RunParallel([i](size_t j, size_t s2)
     {
       ;
     });
@@ -61,6 +61,6 @@ int main()
 
 
   
-  StopWorkers();
+  t.StopWorkers();
 }
 

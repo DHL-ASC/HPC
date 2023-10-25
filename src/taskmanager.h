@@ -15,9 +15,6 @@ namespace ASC_HPC
       void StopWorkers();
       static void RunParallel (const std::function<void(int nr, int size)> & func);
   };
-
-  int TaskManager::numThreads = 0;
-
 }
 
 

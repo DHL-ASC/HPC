@@ -11,6 +11,7 @@
 
 namespace ASC_HPC
 {
+  int TaskManager::numThreads = 0;
 
   class Task
   {
