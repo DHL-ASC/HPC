@@ -37,10 +37,10 @@ namespace ASC_HPC
   static std::vector<std::thread> threads;
   static TQueue queue;
   
-  void StartWorkers(int num)
+  void TaskManager::StartWorkers()
   {
     stop = false;
-    for (int i = 0; i < num; i++)
+    for (int i = 0; i < numThreads; i++)
       {
         TimeLine * patl = timeline.get();
         threads.push_back
@@ -71,8 +71,9 @@ namespace ASC_HPC
       }
   }
 
-  void StopWorkers()
+  void TaskManager::StopWorkers()
   {
+    numThreads=0;
     stop = true;
     for (auto & t : threads)
       t.join();
@@ -80,14 +81,14 @@ namespace ASC_HPC
   }
 
   
-  void RunParallel (int num,
-                    const std::function<void(int nr, int size)> & func)
+  void TaskManager::RunParallel (const std::function<void(int nr, int size)> & func)
   {
     TPToken ptoken(queue);
     TCToken ctoken(queue);
     
     std::atomic<int> cnt{0};
 
+    int num = numThreads>1?numThreads:1;
 
     for (size_t i = 0; i < num; i++)
       {

@@ -3,16 +3,21 @@
 
 
 #include <functional>
+#include <thread>
 
 namespace ASC_HPC
 {
-  
-  void StartWorkers(int num);
-  void StopWorkers();
-  
-  void RunParallel (int num,
-                    const std::function<void(int nr, int size)> & func);
-  
+  class TaskManager{
+    public:
+      static int numThreads;
+      TaskManager(){numThreads = std::thread::hardware_concurrency();}
+      void StartWorkers();
+      void StopWorkers();
+      static void RunParallel (const std::function<void(int nr, int size)> & func);
+  };
+
+  int TaskManager::numThreads = 0;
+
 }
 
 
