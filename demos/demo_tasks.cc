@@ -19,7 +19,8 @@ int main()
   {
     static Timer t("timer one");
     RegionTimer reg(t);
-    cout << "I am task " << i << " out of " << size << endl;
+    if(i == 1)
+      cout << "I am task " << i << " out of " << size << endl;
   });
 
   

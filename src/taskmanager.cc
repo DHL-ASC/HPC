@@ -6,6 +6,8 @@
 #include "taskmanager.h"
 #include "timer.h"
 
+#include <functional>
+
 
 namespace ASC_HPC
 {
