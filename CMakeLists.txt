@@ -21,3 +21,8 @@ target_sources (demo_tasks PUBLIC src/taskmanager.h src/timer.h)
                 
 # target_sources (demo_simd PUBLIC src/simd.h src/timer.h)
 
+
+add_executable (simd_timings demos/simd_timings.cc)
+target_sources (simd_timings PUBLIC src/simd.h)
+
+
