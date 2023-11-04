@@ -48,7 +48,7 @@ int main()
 
     for (int k = 0; k < 10; k++)
       TaskManager::RunParallel([](int i, int size)
-                               { TaskManager::RunParallel(10, [](int j, int size) {}); });
+                               { TaskManager::RunParallel([](int j, int size) {}); });
   }
 
   TaskManager::RunParallel([](int i, int size)
