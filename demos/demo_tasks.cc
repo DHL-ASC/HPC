@@ -28,8 +28,8 @@ int main()
       str << "nested, i,j = " << i << "," << j << "\n";
       cout << str.str(); }); });
 
-  RunParallel(100, [](int i, int size)
-              {
+  TaskManager::RunParallel(100, [](int i, int size)
+                           {
     static Timer t("one of 100", { 0, 0, 1});
     RegionTimer reg(t); });
 
@@ -38,8 +38,8 @@ int main()
     RegionTimer reg(t);
 
     for (int k = 0; k < 100; k++)
-      RunParallel(10, [](int i, int size)
-                  { ; });
+      TaskManager::RunParallel(10, [](int i, int size)
+                               { ; });
   }
 
   {
@@ -47,12 +47,12 @@ int main()
     RegionTimer reg(t);
 
     for (int k = 0; k < 10; k++)
-      RunParallel(10, [](int i, int size)
-                  { RunParallel(10, [](int j, int size) {}); });
+      TaskManager::RunParallel(10, [](int i, int size)
+                               { TaskManager::RunParallel(10, [](int j, int size) {}); });
   }
 
-  RunParallel(1000, [](int i, int size)
-              {
+  TaskManager::RunParallel(1000, [](int i, int size)
+                           {
     static Timer t("timer 1000 tasks", { 1, 0, 0});
     RegionTimer reg(t); });
 
