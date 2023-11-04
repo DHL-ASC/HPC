@@ -8,6 +8,9 @@
 
 namespace ASC_HPC
 {
+  void test_simd_include(){
+    std::cout << "simd include working.." <<std::endl;
+  }
 
 
 #ifdef __AVX__

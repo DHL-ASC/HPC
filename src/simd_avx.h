@@ -5,6 +5,9 @@
 
 namespace ASC_HPC
 {
+  void test_avx_include(){
+    std::cout << "simd_avx include working.." <<std::endl;
+  }
   
   
   template<>
