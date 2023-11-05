@@ -51,8 +51,8 @@ namespace ASC_HPC
     static constexpr int Size() { return 4; }
     auto Val() const { return val; }
     const double * Ptr() const { return (double*)&val; }
-    SIMD<double, 2> Lo() const { return SIMD<double,2>(val[0], val[1]); }
-    SIMD<double, 2> Hi() const { return SIMD<double,2>(val[2], val[3]); }
+    SIMD<double, 2> Lo() const { return SIMD<double,2>(((double*)(&val))[0], ((double*)(&val))[1]); }
+    SIMD<double, 2> Hi() const { return SIMD<double,2>(((double*)(&val))[2], ((double*)(&val))[3]); }
 
     // better:
     // SIMD<double, 2> Lo() const { return _mm256_extractf128_pd(val, 0); }
