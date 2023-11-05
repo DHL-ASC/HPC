@@ -27,8 +27,8 @@ namespace ASC_HPC
     auto Val() const { return mask; }
     mask64 operator[](size_t i) const { return ( (int64_t*)&mask)[0] != 0; }
 
-    SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>(mask[0], mask[1]); }
-    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>(mask[2], mask[3]); }
+    SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>(( (int64_t*)&mask)[0], ( (int64_t*)&mask)[1]); }
+    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>(( (int64_t*)&mask)[2], ( (int64_t*)&mask)[3]); }
   };
 
 
