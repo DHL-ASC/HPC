@@ -26,9 +26,10 @@ namespace ASC_HPC
     SIMD (__m256d _mask) : mask(_mm256_castpd_si256(_mask)) { ; }
     auto Val() const { return mask; }
     mask64 operator[](size_t i) const { return ( (int64_t*)&mask)[0] != 0; }
-
-    SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>(( (int64_t*)&mask)[0], ( (int64_t*)&mask)[1]); }
-    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>(( (int64_t*)&mask)[2], ( (int64_t*)&mask)[3]); }
+    
+    __m256i Data() const { return mask; }
+    static constexpr int Size() { return 4; }
+    static SIMD<mask64, 4> GetMaskFromBits (unsigned int i);
   };
 
 
@@ -51,8 +52,8 @@ namespace ASC_HPC
     static constexpr int Size() { return 4; }
     auto Val() const { return val; }
     const double * Ptr() const { return (double*)&val; }
-    SIMD<double, 2> Lo() const { return SIMD<double,2>(((double*)(&val))[0], ((double*)(&val))[1]); }
-    SIMD<double, 2> Hi() const { return SIMD<double,2>(((double*)(&val))[2], ((double*)(&val))[3]); }
+    SIMD<double, 2> Lo() const { return SIMD<double,2>((*this)[0], (*this)[1]); }
+    SIMD<double, 2> Hi() const { return SIMD<double,2>((*this)[2], (*this)[3]); }
 
     // better:
     // SIMD<double, 2> Lo() const { return _mm256_extractf128_pd(val, 0); }
