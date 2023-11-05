@@ -2,7 +2,7 @@
 #define SIMD_AVX_H
 
 #include <immintrin.h>
-
+#include "simd.h"
 
 /*
   implementation of SIMDs for Intel-CPUs with AVX support:
