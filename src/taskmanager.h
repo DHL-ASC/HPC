@@ -13,7 +13,7 @@ namespace ASC_HPC
     static int numThreads;
     static size_t writeTrace;
     TaskManager(bool trace = false) { 
-      numThreads = std::thread::hardware_concurrency();
+      numThreads = std::thread::hardware_concurrency()/2;
       if(trace)
       {
         writeTrace++;

@@ -180,7 +180,7 @@ namespace ASC_HPC
                 file << ((e.what==0) ? 12 : 13) << " ";
                 file << fac*(e.when-start) << " thdstate th" << i << " ";
                 if (e.what == 0)
-                  file << "timer" << e.timer << " idx ";
+                  file << "timer" << e.timer << " " << e.id;
                 file << std::endl;
               }
           }

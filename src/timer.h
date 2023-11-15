@@ -70,6 +70,7 @@ namespace ASC_HPC
   {
     size_t when;
     int timer;
+    int id;
     int what; // 0..start, 1..stop
   };
 
@@ -108,6 +109,7 @@ namespace ASC_HPC
   class Timer
   {
     int nr;
+    int id;
     static std::vector<std::string> names;
     static std::vector<std::array<float,3>> cols;    
     static std::mutex m;
@@ -120,16 +122,18 @@ namespace ASC_HPC
       cols.push_back(col);
     }
 
-    void Start()
+    void Start(size_t idd)
     {
-      if (timeline)
-        timeline->Add (Event{GetTimeCounter(), nr, 0});
+      id=idd;
+      if (timeline){
+        timeline->Add (Event{GetTimeCounter(), nr, id, 0});
+      }
     }
 
     void Stop()
     {
       if (timeline)
-        timeline->Add(Event{GetTimeCounter(), nr, 1});
+        timeline->Add(Event{GetTimeCounter(), nr, id, 1});
     }
     friend TimeLine;
   };
@@ -139,9 +143,9 @@ namespace ASC_HPC
   {
     Timer & t;
   public:
-    RegionTimer (Timer & _t) : t(_t)
+    RegionTimer (Timer & _t,int idd) : t(_t)
     {
-      t.Start();
+      t.Start(idd);
     }
     ~RegionTimer ()
     {
