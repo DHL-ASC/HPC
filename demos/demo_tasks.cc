@@ -18,7 +18,7 @@ int main()
   TaskManager::RunParallel([](int i, int size)
                            {
     static Timer t("timer one");
-    RegionTimer reg(t);
+    RegionTimer reg(t,i);
       cout << "I am task " << i << " out of " << size << endl; });
 
   TaskManager::RunParallel([](int i, int s)
@@ -31,11 +31,11 @@ int main()
   TaskManager::RunParallel([](int i, int size)
                            {
     static Timer t("one of 100", { 0, 0, 1});
-    RegionTimer reg(t); });
+    RegionTimer reg(t,i); });
 
   {
     static Timer t("100x10 parallel runs", {0, 0, 1});
-    RegionTimer reg(t);
+    RegionTimer reg(t,0);
 
     for (int k = 0; k < 100; k++)
       TaskManager::RunParallel([](int i, int size)
@@ -44,7 +44,7 @@ int main()
 
   {
     static Timer t("10x10x10 parallel runs", {0, 0, 1});
-    RegionTimer reg(t);
+    RegionTimer reg(t,0);
 
     for (int k = 0; k < 10; k++)
       TaskManager::RunParallel([](int i, int size)
@@ -54,12 +54,12 @@ int main()
   TaskManager::RunParallel([](int i, int size)
                            {
     static Timer t("timer 1000 tasks", { 1, 0, 0});
-    RegionTimer reg(t); });
+    RegionTimer reg(t,i); });
 
   TaskManager::RunParallel([](int i, int s)
                            {
     static Timer t("timer 4", { 1, 1, 0});
-    RegionTimer reg(t);    
+    RegionTimer reg(t,i);    
     TaskManager::RunParallel([i](size_t j, size_t s2)
     {
       ;
