@@ -9,7 +9,7 @@
 #include <functional>
 
 
-namespace ASC_HPC
+namespace DHL_HPC
 {
   int TaskManager::numThreads = 0;
   size_t TaskManager::writeTrace = 0;

@@ -5,7 +5,7 @@
 #include <thread>
 #include <timer.h>
 
-namespace ASC_HPC
+namespace DHL_HPC
 {
   class TaskManager
   {

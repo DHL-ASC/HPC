@@ -4,7 +4,7 @@
 
 #include <simd.h>
 
-using namespace ASC_HPC;
+using namespace DHL_HPC;
 using std::cout, std::endl;
 
 auto Func1 (SIMD<double> a, SIMD<double> b)

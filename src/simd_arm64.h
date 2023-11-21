@@ -12,7 +12,7 @@
 */
 
 
-namespace ASC_HPC
+namespace DHL_HPC
 {
 
   template<>

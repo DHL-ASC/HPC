@@ -2,3 +2,6 @@
 	path = concurrentqueue
     url = https://github.com/cameron314/concurrentqueue.git
 
+[submodule "taskflow"]
+	path = taskflow
+	url = https://github.com/taskflow/taskflow.git
