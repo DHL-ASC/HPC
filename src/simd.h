@@ -7,7 +7,7 @@
 #include <array>
 
 
-namespace ASC_HPC
+namespace DHL_HPC
 {
   void test_simd_include(){
     std::cout << "simd include working.." <<std::endl;
