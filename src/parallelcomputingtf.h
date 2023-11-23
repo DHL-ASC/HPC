@@ -35,7 +35,7 @@ namespace DHL_HPC
 
     }
     static int getNumThreads() { return numThreads; }
-    static void RunParallel(const std::function<void(size_t id, size_t nThreads)> &func);
+    static void RunParallel(const std::function<void(size_t id, size_t nThreads)> &func, size_t nTasks);
     ~ParallelComputingTF(){};
   };
 }
