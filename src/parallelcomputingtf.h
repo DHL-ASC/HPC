@@ -15,7 +15,6 @@ namespace DHL_HPC
     static bool trace;
     ParallelComputingTF(bool tr = false) 
     { 
-        numThreads = std::thread::hardware_concurrency();
         trace = tr;
     }
     ParallelComputingTF(size_t nt, bool tr = false) 
@@ -36,7 +35,7 @@ namespace DHL_HPC
 
     }
     static int getNumThreads() { return numThreads; }
-    static void RunParallel(const std::function<void(size_t id, size_t nThreads)> &func, size_t nTasks);
+    static void RunParallel(const std::function<void(size_t id, size_t nThreads)> &func);
     ~ParallelComputingTF(){};
   };
 }

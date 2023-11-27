@@ -7,11 +7,12 @@ namespace DHL_HPC
     tf::Executor* ParallelComputingTF::executor = new tf::Executor(1);
     bool ParallelComputingTF::trace = false;
 
-    void ParallelComputingTF::RunParallel (const std::function<void(size_t id, size_t nThreads)> & func, size_t nTasks){
+    void ParallelComputingTF::RunParallel (const std::function<void(size_t id, size_t nThreads)> & func){
         tf::Taskflow taskflow;
-        for (size_t i = 0; i < nTasks; ++i)
+        size_t n = DHL_HPC::ParallelComputingTF::getNumThreads();
+        for (size_t i = 0; i < n; ++i)
         { 
-            taskflow.emplace([i,nTasks,&func](){func(i,nTasks);});   
+            taskflow.emplace([i,n,&func](){func(i,n);});   
         }
         DHL_HPC::ParallelComputingTF::executor->run(taskflow).wait();
     }
