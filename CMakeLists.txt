@@ -31,3 +31,6 @@ add_executable (simd_timings demos/simd_timings.cc)
 target_sources (simd_timings PUBLIC src/simd.h)
 
 
+add_executable (timing_mem demos/timing_mem.cc)
+target_sources (timing_mem PUBLIC src/simd.h)
+

@@ -26,10 +26,9 @@ namespace DHL_HPC
     SIMD (__m256d _mask) : mask(_mm256_castpd_si256(_mask)) { ; }
     auto Val() const { return mask; }
     mask64 operator[](size_t i) const { return ( (int64_t*)&mask)[i] != 0; }
-    
-    __m256i Data() const { return mask; }
-    static constexpr int Size() { return 4; }
-    static SIMD<mask64, 4> GetMaskFromBits (unsigned int i);
+
+    SIMD<mask64, 2> Lo() const { return SIMD<mask64,2>((*this)[0], (*this)[1]); }
+    SIMD<mask64, 2> Hi() const { return SIMD<mask64,2>((*this)[2], (*this)[3]); }
   };
 
 
@@ -58,7 +57,7 @@ namespace DHL_HPC
     // better:
     // SIMD<double, 2> Lo() const { return _mm256_extractf128_pd(val, 0); }
     // SIMD<double, 2> Hi() const { return _mm256_extractf128_pd(val, 1); }
-    double operator[](size_t i) const { return ((double*)(&val))[i]; }
+    double operator[](size_t i) const { return ((double*)&val)[i]; }
 
     void Store (double * p) const { _mm256_storeu_pd(p, val); }
     void Store (double * p, SIMD<mask64,4> mask) const { _mm256_maskstore_pd(p, mask.Val(), val); }
@@ -87,7 +86,7 @@ namespace DHL_HPC
     // const double * Ptr() const { return (double*)&val; }
     // SIMD<double, 2> Lo() const { return _mm256_extractf128_pd(val, 0); }
     // SIMD<double, 2> Hi() const { return _mm256_extractf128_pd(val, 1); }
-    int64_t operator[](size_t i) const { return ((int64_t*)(&val))[i]; }
+    int64_t operator[](size_t i) const { return ((int64_t*)&val)[i]; }
   };
   
 
