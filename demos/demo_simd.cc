@@ -72,21 +72,18 @@ int main()
   cout << "Select(mask, a, b) = " << Select(mask, a,b) << endl;
   
   {
-    // ARM block
-    #if defined(__aarch64__) || defined(_M_ARM64)
-    SIMD<double,2> c(4.,5.);
-    SIMD<double,2> d(4.,2.);
+    // Arithmetics
+    SIMD<double,4> c(4.,5.,10.,3.);
+    SIMD<double,4> d(4.);
     cout << "c = " << c << endl;
     cout << "d = " << d << endl;
 
     auto mask2 = (d >= c);
-    auto equal = (c == d);
 
+    cout << "c - d = " << c-d << endl;
     cout << "c * d = " << c*d << endl;
     cout << "c / d = " << c/d << endl;
-    cout << "10 / d = " << 10/d << endl;
+    cout << "10 / c = " << 10./c << endl;
     cout << "d >= c = " << mask2 << endl;
-    cout << "c == d = " << equal << endl;
-    #endif
   }
 }
