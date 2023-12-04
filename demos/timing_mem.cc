@@ -7,7 +7,7 @@
 
 #include <simd.h>
 
-using namespace ASC_HPC;
+using namespace DHL_HPC;
 using namespace std;
 
 
