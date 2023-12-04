@@ -21,10 +21,10 @@ add_executable (demo_taskflow demos/demo_taskflow.cc
 target_sources (demo_taskflow PUBLIC src/parallelcomputingtf.h src/timer.h)
 
 
-# add_executable (demo_simd demos/demo_simd.cc
-                # src/timer.cc)
+add_executable (demo_simd demos/demo_simd.cc
+                src/timer.cc)
                 
-# target_sources (demo_simd PUBLIC src/simd.h src/timer.h)
+target_sources (demo_simd PUBLIC src/simd.h src/timer.h)
 
 
 add_executable (simd_timings demos/simd_timings.cc)

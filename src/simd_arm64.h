@@ -50,10 +50,10 @@ namespace DHL_HPC
 
     SIMD (double const * p) : val{vld1q_f64(p)} { }
     SIMD (double const * p, SIMD<mask64,2> mask)
-      {
-	val[0] = mask[0] ? p[0] : 0;
-	val[1] = mask[1] ? p[1] : 0;
-      }
+    {
+      val[0] = mask[0] ? p[0] : 0;
+      val[1] = mask[1] ? p[1] : 0;
+    }
 
     static constexpr int Size() { return 2; }    
     auto Val() const { return val; }
@@ -81,6 +81,12 @@ namespace DHL_HPC
   inline auto operator* (SIMD<double,2> a, SIMD<double,2> b) { return SIMD<double,2> (a.Val()*b.Val()); }
   inline auto operator* (double a, SIMD<double,2> b) { return SIMD<double,2> (a*b.Val()); }    
   
+  inline auto operator/ (SIMD<double,2> a, SIMD<double,2> b) { return SIMD<double,2> (a.Val() / b.Val()); }
+  inline auto operator/ (double a, SIMD<double,2> b) { return SIMD<double,2> (a / b.Val()); }    
+
+  inline auto operator>= (SIMD<double,2> a, SIMD<double,2> b) { return SIMD<mask64,2>(vcgeq_f64(a.Val(), b.Val())); }
+  inline auto operator== (SIMD<double,2> a, SIMD<double,2> b) { return SIMD<mask64,2>(vceqq_f64(a.Val(), b.Val())); }
+
   // a*b+c
   inline SIMD<double,2> FMA (SIMD<double,2> a, SIMD<double,2> b, SIMD<double,2> c) 
   { return vmlaq_f64(c.Val(), a.Val(), b.Val()); }

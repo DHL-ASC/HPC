@@ -71,4 +71,20 @@ int main()
 
   cout << "Select(mask, a, b) = " << Select(mask, a,b) << endl;
   
+  {
+    // ARM block
+    SIMD<double,2> c(4.,5.);
+    SIMD<double,2> d(4.,2.);
+    cout << "c = " << c << endl;
+    cout << "d = " << d << endl;
+
+    auto mask2 = (d >= c);
+    auto equal = (c == d);
+
+    cout << "c * d = " << c*d << endl;
+    cout << "c / d = " << c/d << endl;
+    cout << "10 / d = " << 10/d << endl;
+    cout << "d >= c = " << mask2 << endl;
+    cout << "c == d = " << equal << endl;
+  }
 }
